@@ -13,9 +13,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       onGenerateRoute: AppRoutes.generateRote,
+      debugShowCheckedModeBanner: false,
       initialRoute: RouteName.splash,
       title: 'Flutter Demo',
       theme: ThemeData(
+        backgroundColor: Colors.black,
         primarySwatch: Colors.blue,
       ),
     );
