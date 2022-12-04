@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp( Provider(
-      create: (BuildContext context) {
-        return CarsViewModel();
-      },
-  child: const MyApp()));
+  runApp( MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_)=>CarsViewModel())
+      ],
+      child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

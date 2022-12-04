@@ -1,8 +1,20 @@
 import 'package:car_showroom/components/constants/AppImages.dart';
+import 'package:car_showroom/view_models/carsviewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  initState(){
+    context.read<CarsViewModel>().getCars();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +36,19 @@ class HomePage extends StatelessWidget {
                   )
                 ),
               ),
-            )
+            ), //image
+            Consumer<CarsViewModel>(
+                builder: (context, carsviewmodel, child) {
+                  return Container(
+                    child: carsviewmodel.isLoading?
+                    CircularProgressIndicator():
+                    carsviewmodel.cars==null?
+                    Text("Hech nima yo'q",style: TextStyle(color: Colors.white),):
+                    Text("Ma'lumotlar keldi",style: TextStyle(color: Colors.white),)
+                  );
+
+
+                },)
           ],
         ),
       ),

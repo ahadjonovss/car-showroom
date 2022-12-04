@@ -1,24 +1,47 @@
 class CarsShortDataModel {
+  CarsShortDataModel({
+    required this.data,
+  });
+
+  List<Datum> data;
+
+  factory CarsShortDataModel.fromJson(Map<String, dynamic> json) => CarsShortDataModel(
+    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "data": List<dynamic>.from(data.map((x) => x.toJson())),
+  };
+}
+
+class Datum {
+  Datum({
+    required this.id,
+    required this.carModel,
+    required this.averagePrice,
+    required this.logo,
+    required this.establishedYear,
+  });
+
   int id;
-  String car_model;
-  num average_price;
+  String carModel;
+  int averagePrice;
   String logo;
-  int established_year;
+  int establishedYear;
 
-  CarsShortDataModel(
-      {required this.logo,
-      required this.id,
-      required this.average_price,
-      required this.car_model,
-      required this.established_year});
+  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+    id: json["id"],
+    carModel: json["car_model"],
+    averagePrice: json["average_price"],
+    logo: json["logo"],
+    establishedYear: json["established_year"],
+  );
 
-  factory CarsShortDataModel.fromJson(Map<String, dynamic> json) {
-    return CarsShortDataModel(
-      logo: json["logo"],
-      id: json["id"],
-      average_price: json["average_price"],
-      car_model: json["car_model"],
-      established_year: json["established_year"],
-    );
-  }
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "car_model": carModel,
+    "average_price": averagePrice,
+    "logo": logo,
+    "established_year": establishedYear,
+  };
 }
