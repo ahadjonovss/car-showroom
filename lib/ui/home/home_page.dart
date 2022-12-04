@@ -1,4 +1,6 @@
 import 'package:car_showroom/components/constants/AppImages.dart';
+import 'package:car_showroom/components/constants/fonts.dart';
+import 'package:car_showroom/ui/home/widgets/car_item.dart';
 import 'package:car_showroom/view_models/carsviewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -41,10 +43,25 @@ class _HomePageState extends State<HomePage> {
                 builder: (context, carsviewmodel, child) {
                   return Container(
                     child: carsviewmodel.isLoading?
-                    CircularProgressIndicator():
+                    const CircularProgressIndicator():
                     carsviewmodel.cars==null?
-                    Text("Hech nima yo'q",style: TextStyle(color: Colors.white),):
-                    Text("Ma'lumotlar keldi",style: TextStyle(color: Colors.white),)
+                    const Text("Hech nima yo'q",style: TextStyle(color: Colors.white),):
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(12),
+                        child: GridView.builder(
+                          itemCount: carsviewmodel.cars!.data.length,
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 20,
+                              mainAxisSpacing: 20,
+                              childAspectRatio: 2.3/3,
+                            ),
+                            itemBuilder: (context, index) => const CarItemWidget(),),
+                      ),
+                    )
                   );
 
 
