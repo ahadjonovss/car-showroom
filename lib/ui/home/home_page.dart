@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                               mainAxisSpacing: 20,
                               childAspectRatio: 2.3/3,
                             ),
-                            itemBuilder: (context, index) => const CarItemWidget(),),
+                            itemBuilder: (context, index) =>  CarItemWidget(car: carsviewmodel.cars!.data[index]),),
                       ),
                     )
                   );

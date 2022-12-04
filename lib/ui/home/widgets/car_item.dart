@@ -5,7 +5,7 @@ import '../../../components/constants/AppImages.dart';
 import '../../../components/constants/fonts.dart';
 
 class CarItemWidget extends StatelessWidget {
-  CarsShortDataModel car;
+  Datum car;
    CarItemWidget({required this.car,Key? key}) : super(key: key);
 
   @override
@@ -13,8 +13,8 @@ class CarItemWidget extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: 12),
       padding: EdgeInsets.all(13),
-      height: 200,
-      width: 160,
+      height: MediaQuery.of(context).size.height*0.21,
+      width: MediaQuery.of(context).size.width*0.47,
       decoration: BoxDecoration(
         gradient: const LinearGradient(
             begin: Alignment.topCenter,
@@ -32,12 +32,14 @@ class CarItemWidget extends StatelessWidget {
         children:  [
           const Text("⭐️ 4.5",style: TextStyle(color: Colors.white),),
           SizedBox(height: 28,),
-          Image.asset("assets/images/1.png",width: 180,),
+          Container(
+            height: MediaQuery.of(context).size.height*0.12,
+              child: Image.asset("assets/images/${car.id}.png",width: 180,)),
           Row(
             children: [
-              Image.asset(AppImages.brand,width: 20,),
+              Image.network(car.logo,width: 20,),
               SizedBox(width: 4,),
-              Text("Porsche",style: font()),
+              Text(car.carModel,style: font()),
             ],
           ),
           Row(
@@ -47,7 +49,7 @@ class CarItemWidget extends StatelessWidget {
                 children: [
                   Image.asset(AppImages.brand,width: 20,color: Colors.transparent,),
                   SizedBox(width: 4,),
-                  Text("\$ 9.999",style: font()),
+                  Text("\$ ${car.averagePrice}",style: font()),
 
                 ],
               ),
