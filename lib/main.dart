@@ -1,8 +1,14 @@
 import 'package:car_showroom/components/routes/routes.dart';
+import 'package:car_showroom/view_models/carsviewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp( Provider(
+      create: (BuildContext context) {
+        return CarsViewModel();
+      },
+  child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
