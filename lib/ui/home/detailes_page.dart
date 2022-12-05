@@ -27,21 +27,23 @@ class _DetailesPageState extends State<DetailesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Consumer<CarsViewModel>(
-        builder: (context, carsviewmodel, child) {
-          return carsviewmodel.isLoading?
-              Container(
-                height: MediaQuery.of(context).size.height,
-                width: double.infinity,
-                child:Center(
-                  child: Lottie.asset("assets/lotties/waiting.json"),
-                )
-              ):
-              carsviewmodel.car==null?
-                  const Text("Hech narsa yo'q"):
-                  CarDetails(car: carsviewmodel.car!);
+      body: SafeArea(
+        child: Consumer<CarsViewModel>(
+          builder: (context, carsviewmodel, child) {
+            return carsviewmodel.isLoading?
+                SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  width: double.infinity,
+                  child:Center(
+                    child: Lottie.asset("assets/lotties/waiting.json"),
+                  )
+                ):
+                carsviewmodel.car==null?
+                    const Text("Hech narsa yo'q"):
+                    CarDetails(car: carsviewmodel.car!);
 
-        },
+          },
+        ),
       ),
     );
   }
