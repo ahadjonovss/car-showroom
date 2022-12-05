@@ -21,7 +21,7 @@ class AppRoutes{
       case RouteName.splash:
         return MaterialPageRoute(builder: (_)=>const SplashPage());
       case RouteName.detailes:
-        return MaterialPageRoute(builder: (_)=>const DetailesPage());
+        return MaterialPageRoute(builder: (_)=> DetailesPage(car: args,));
       default: return MaterialPageRoute(builder: (_)=>const Scaffold());
     }
 
