@@ -1,5 +1,6 @@
 import 'package:car_showroom/components/constants/AppImages.dart';
 import 'package:car_showroom/ui/home/widgets/car_item.dart';
+import 'package:car_showroom/ui/home/widgets/home_page_shimmer.dart';
 import 'package:car_showroom/view_models/carsviewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -43,7 +44,20 @@ class _HomePageState extends State<HomePage> {
                 builder: (context, carsviewmodel, child) {
                   return Container(
                     child: carsviewmodel.isLoading?
-                    const CircularProgressIndicator():
+                     Expanded(
+                       child: Padding(
+                         padding: const EdgeInsets.all(12),
+                         child: GridView.builder(
+                           shrinkWrap: true,
+                             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                           crossAxisCount: 2,
+                           crossAxisSpacing: 20,
+                           mainAxisSpacing: 20,
+                           childAspectRatio: 2.3/3,
+                         ),
+                             itemBuilder: (context,index)=> const CarItemShimmer()),
+                    ),
+                     ):
                     carsviewmodel.cars==null?
                     const Text("Hech nima yo'q",style: TextStyle(color: Colors.white),):
                     Expanded(
