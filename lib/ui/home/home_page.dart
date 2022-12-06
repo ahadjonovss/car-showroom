@@ -21,18 +21,6 @@ class HomePage extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: Column(
               children: [
-                SafeArea(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height*0.3,
-                    width: double.infinity,
-                    decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage(AppImages.car),
-                            fit: BoxFit.cover
-                        )
-                    ),
-                  ),
-                ), //image
                 Container(
                     child: carsviewmodel.isLoading?
                     Expanded(
@@ -52,21 +40,34 @@ class HomePage extends StatelessWidget {
                     carsviewmodel.cars==null?
                     const Text("Hech nima yo'q",style: TextStyle(color: Colors.white),):
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(12),
-                        child: GridView.builder(
-                          itemCount: carsviewmodel.cars!.data.length,
-                          physics: const BouncingScrollPhysics(),
-                          shrinkWrap: true,
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 20,
-                            mainAxisSpacing: 20,
-                            childAspectRatio: 2.3/3,
+                      child: CustomScrollView(
+                        slivers: [
+                          SliverAppBar(
+                            backgroundColor: Colors.black,
+                            expandedHeight: 300.0,
+                            flexibleSpace: FlexibleSpaceBar(
+                              background: Image.asset(AppImages.car),
+                            ),
+                            title: Text("Cars"),
+                            centerTitle: true,
+                            pinned: true,
                           ),
-                          itemBuilder: (context, index) =>  CarItemWidget(car: carsviewmodel.cars!.data[index]),),
+                          SliverGrid(
+                            delegate: SliverChildBuilderDelegate(
+                              childCount: carsviewmodel.cars!.data.length,
+                                  (context, index) => CarItemWidget(car: carsviewmodel.cars!.data[index]),
+                            ),
+                            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                                mainAxisSpacing: 10,
+                                maxCrossAxisExtent: 200.0,
+                                crossAxisSpacing: 10.0,
+                                childAspectRatio: 2/3
+
+                            ),)
+                        ],
+
                       ),
-                    )
+                    ),
                 )
               ],
             ),
