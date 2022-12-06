@@ -4,11 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp( MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_)=>CarsViewModel())
-      ],
-      child: MyApp()));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

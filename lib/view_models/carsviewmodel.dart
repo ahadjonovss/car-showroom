@@ -4,6 +4,10 @@ import 'package:flutter/cupertino.dart';
 import '../data/models/car_model.dart';
 class CarsViewModel extends ChangeNotifier{
 
+  CarsViewModel(){
+    getCars();
+  }
+
   bool isLoading=false;
   CarsShortDataModel? cars;
   Car? car;
