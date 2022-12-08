@@ -23,20 +23,10 @@ class HomePage extends StatelessWidget {
               children: [
                 Container(
                     child: carsviewmodel.isLoading?
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(12),
-                        child: GridView.builder(
-                            shrinkWrap: true,
-                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 20,
-                              mainAxisSpacing: 20,
-                              childAspectRatio: 2.3/3,
-                            ),
-                            itemBuilder: (context,index)=> const CarItemShimmer()),
-                      ),
-                    ):
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                        width: MediaQuery.of(context).size.width,
+                        child: const CarItemShimmer()):
                     carsviewmodel.cars==null?
                     const Text("Hech nima yo'q",style: TextStyle(color: Colors.white),):
                     Expanded(
@@ -52,18 +42,22 @@ class HomePage extends StatelessWidget {
                             centerTitle: true,
                             pinned: true,
                           ),
-                          SliverGrid(
-                            delegate: SliverChildBuilderDelegate(
-                              childCount: carsviewmodel.cars!.data.length,
-                                  (context, index) => CarItemWidget(car: carsviewmodel.cars!.data[index]),
-                            ),
-                            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                                mainAxisSpacing: 10,
-                                maxCrossAxisExtent: 200.0,
-                                crossAxisSpacing: 10.0,
-                                childAspectRatio: 2/3
+                          SliverPadding(
+                            padding: const EdgeInsets.all(12),
 
-                            ),)
+                            sliver: SliverGrid(
+                              delegate: SliverChildBuilderDelegate(
+                                childCount: carsviewmodel.cars!.data.length,
+                                    (context, index) => CarItemWidget(car: carsviewmodel.cars!.data[index]),
+                              ),
+                              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                                  mainAxisSpacing: 10,
+                                  maxCrossAxisExtent: MediaQuery.of(context).size.height*0.21,
+                                  crossAxisSpacing: 10.0,
+                                  childAspectRatio: 2.3/3
+
+                              ),),
+                          )
                         ],
 
                       ),

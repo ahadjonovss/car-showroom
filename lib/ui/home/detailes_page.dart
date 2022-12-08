@@ -15,6 +15,7 @@ class DetailesPage extends StatefulWidget {
 }
 
 class _DetailesPageState extends State<DetailesPage> {
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -35,7 +36,7 @@ class _DetailesPageState extends State<DetailesPage> {
                     )
                 ):
                 carsViewModel.car==null?
-                SafeArea(child: const Text("Hech narsa yo'q",style: TextStyle(color: Colors.white),)):
+                const SafeArea(child:  Text("Hech narsa yo'q",style: TextStyle(color: Colors.white),)):
                 CarDetails(car: carsViewModel.car!);
 
               },
